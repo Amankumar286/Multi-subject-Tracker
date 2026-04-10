@@ -1,0 +1,38 @@
+# Run this from inside your sports-tracker/ folder
+cat > .gitignore << 'EOF'
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# YOLO model weights (large binary files — auto-downloaded on first run)
+*.pt
+*.onnx
+
+# Output videos and generated files (too large for GitHub)
+output/*
+!output/.gitkeep
+*.mp4
+*.avi
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Environment / secrets
+.env
+*.yaml.local
+
+# IDE
+.vscode/
+.idea/
+EOF

@@ -1,0 +1,42 @@
+# ── Video ──────────────────────────────────────────
+video:
+  url: "https://www.youtube.com/watch?v=bwJ-TNu0hGM"
+  output_path: "output/input_video.mp4"
+  max_duration_sec: 120          # download only first 2 min to keep size small
+
+# ── Detection ──────────────────────────────────────
+detection:
+  model: "yolov8n.pt"            # nano = fastest on CPU; swap to yolov8s.pt for better accuracy
+  confidence: 0.35               # lower = more detections, higher = fewer false positives
+  iou_threshold: 0.45
+  classes: [0]                   # 0 = person; add more if needed (e.g. 32=sports ball)
+  device: "cpu"
+
+# ── Tracking ───────────────────────────────────────
+tracking:
+  frame_skip: 3                  # process every 3rd frame (speeds up 3x on CPU)
+  tracker_config: "bytetrack.yaml"
+  max_age: 30                    # frames to keep a lost track alive
+  min_hits: 3                    # frames before confirming a new track
+  trail_length: 40               # number of past positions to draw as trail
+
+# ── Annotation ─────────────────────────────────────
+annotation:
+  box_thickness: 2
+  font_scale: 0.6
+  show_confidence: true
+  show_trail: true
+  trail_thickness: 2
+
+# ── Output ─────────────────────────────────────────
+output:
+  annotated_video: "output/tracked_output.mp4"
+  fps: 30
+  resolution: [1280, 720]       # resize output to this; null = keep original
+
+# ── Optional enhancements ──────────────────────────
+enhancements:
+  heatmap: true
+  heatmap_path: "output/heatmap.png"
+  count_plot: true
+  count_plot_path: "output/count_over_time.png"
